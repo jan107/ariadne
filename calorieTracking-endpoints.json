@@ -1,6 +1,6 @@
 {
    "host":"localhost:8080",
-   "basePath":"/calTracking",
+   "basePath":"/eventTracking",
    "tags":[
       {
          "name":"food-management-api-impl",

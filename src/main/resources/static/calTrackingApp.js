@@ -3,16 +3,16 @@
   angular
       .module('CalTrackingApp',['ngMaterial', 'ngMessages'])
       .controller('CalTrackingSubmitCtrl', ['$scope', '$http', function($scope, $http) {
-        $scope.calTracking = function () {
+        $scope.eventTracking = function () {
             console.log('Tracking: ' + $scope.calories + ' calories for ' + $scope.ctrl.selectedItem.value);
 
-            var calTrackingPayload = {
+            var eventTrackingPayload = {
 				userId : 1,
 				foodId : $scope.ctrl.selectedItem.value,
                 calories : $scope.calories
             }
 
-            var res = $http.put('http://localhost:8080/calTracking/public/trackCalorie',calTrackingPayload);
+            var res = $http.put('http://localhost:8080/eventTracking/public/trackCalorie',eventTrackingPayload);
             
             res.success(function(data, status, headers, config) {
                 $scope.message = data;
@@ -43,7 +43,7 @@
     function querySearch (query) {
         if (self.allFoods == null) {
             self.allFoods = [];
-            $http.get('http://localhost:8080/calTracking/public/getFoods')
+            $http.get('http://localhost:8080/eventTracking/public/getFoods')
             .then(function (foods) {
                 for (var i=0; i<foods.data.length; i++) {
                     var food = foods.data[i];

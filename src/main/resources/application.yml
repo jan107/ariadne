@@ -2,7 +2,7 @@
 #   Server
 ##################
 server:
-  context-path: /calTracking
+  context-path: /eventTracking
   
 ########################
 #   Database Settings
