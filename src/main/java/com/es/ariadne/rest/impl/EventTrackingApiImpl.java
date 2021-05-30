@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.es.ariadne.domain.CalorieTrackingRequest;
 import com.es.ariadne.domain.CalorieViewTrackingRequest;
+import com.es.ariadne.domain.EventFilterRequest;
 import com.es.ariadne.domain.Response;
 import com.es.ariadne.domain.UserCalorieTrackingResponse;
 import com.es.ariadne.rest.EventTrackingApi;
@@ -41,7 +42,17 @@ public class EventTrackingApiImpl implements EventTrackingApi {
 	}
 
 	@Override
-	public ResponseEntity getEvents(Long minValue, Long maxValue) {
+	public ResponseEntity getEventsByRange(Long minValue, Long maxValue) {
 		return new ResponseEntity(eventTrackingService.searchEventsByInterval(minValue, maxValue), HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity getEventsByFilter(EventFilterRequest eventFilterRequest) {
+		return new ResponseEntity(eventTrackingService.searchEventsByFilter(eventFilterRequest.getEvents()), HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity getEventsByRange(Long source) {
+		return new ResponseEntity(eventTrackingService.searchEventsBySource(source), HttpStatus.OK);
 	}
 }

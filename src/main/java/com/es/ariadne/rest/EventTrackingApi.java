@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.es.ariadne.domain.CalorieTrackingRequest;
 import com.es.ariadne.domain.CalorieViewTrackingRequest;
+import com.es.ariadne.domain.EventFilterRequest;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -43,12 +44,27 @@ public interface EventTrackingApi {
 	ResponseEntity removeCalorie(@RequestBody CalorieTrackingRequest trackCalorieRequest);
 	
 	
-	@GetMapping(value = "/public/getEvents/{minValue}/{maxValue}", produces= {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value = "/public/getEventsByRange/{minValue}/{maxValue}", produces= {MediaType.APPLICATION_JSON_VALUE})
 	@ApiOperation(value="Return all Events between minValue and maxValue", notes="This is a public API", response=List.class)
 	@ApiResponses(value = { 
 			@ApiResponse(code = HttpServletResponse.SC_OK, message = "Success"),
-			@ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Not found any food by calories range")
+			@ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Not found any event by range")
 	})
-	ResponseEntity getEvents(@PathVariable("minValue") Long minValue, @PathVariable("maxValue") Long maxValue);
+	ResponseEntity getEventsByRange(@PathVariable("minValue") Long minValue, @PathVariable("maxValue") Long maxValue);
+	
+	
+	@PostMapping(value = "/public/getEventsByFilter", 
+			produces= {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@ApiOperation(value="Return all Events from event filter list.", notes="This is a public API", response=List.class)
+	@ApiResponse(code = HttpServletResponse.SC_OK, message = "Success")
+	ResponseEntity getEventsByFilter(@RequestBody EventFilterRequest eventFilterRequest);
+	
+	@GetMapping(value = "/public/getEventsBySource/{source}", produces= {MediaType.APPLICATION_JSON_VALUE})
+	@ApiOperation(value="Return all Events filtered by source", notes="This is a public API", response=List.class)
+	@ApiResponses(value = { 
+			@ApiResponse(code = HttpServletResponse.SC_OK, message = "Success"),
+			@ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Not found any event by source")
+	})
+	ResponseEntity getEventsByRange(@PathVariable("source") Long source);
 	
 }

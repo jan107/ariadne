@@ -20,5 +20,15 @@ public class EventTrackingServiceImpl implements EventTrackingService {
 		return eventTrackingDao.searchEventsByInterval(minValue, maxValue);
 	}
 
+	@Override
+	public List<EventEntity> searchEventsByFilter(List<Long> events) {
+		return eventTrackingDao.searchEventsByFilter(events);
+	}
+
+	@Override
+	public List<EventEntity> searchEventsBySource(Long source) {
+		return eventTrackingDao.searchEventsBySource(source);
+	}
+
 	
 }

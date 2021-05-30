@@ -20,4 +20,14 @@ public class EventTrackingDaoImpl implements EventTrackingDao  {
 		return eventRepository.searchEventByRange(minValue, maxValue);
 	}
 
+	@Override
+	public List<EventEntity> searchEventsByFilter(List<Long> events) {
+		return eventRepository.searchEventByFilter(events);
+	}
+
+	@Override
+	public List<EventEntity> searchEventsBySource(Long source) {
+		return eventRepository.searchEventBySource(source);
+	}
+
 }
