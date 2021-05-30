@@ -12,11 +12,15 @@ import com.es.ariadne.domain.Response;
 import com.es.ariadne.domain.UserCalorieTrackingResponse;
 import com.es.ariadne.rest.EventTrackingApi;
 import com.es.ariadne.service.CalorieTrackingService;
+import com.es.ariadne.service.EventTrackingService;
 
 @Component
 public class EventTrackingApiImpl implements EventTrackingApi {
 	@Autowired
 	private CalorieTrackingService calorieTrackingService;
+	
+	@Autowired
+	private EventTrackingService eventTrackingService;
 		    
 	@Override
 	public ResponseEntity addCalorie(@RequestBody CalorieTrackingRequest trackCalorieRequest) {
@@ -34,5 +38,10 @@ public class EventTrackingApiImpl implements EventTrackingApi {
 	public ResponseEntity viewCalorie(@RequestBody CalorieViewTrackingRequest trackCalorieRequest) {
 		UserCalorieTrackingResponse userCalorieTrackingResponse = this.calorieTrackingService.viewCalorie(trackCalorieRequest);
 		return new ResponseEntity(userCalorieTrackingResponse.getUserCalorieDailyTracking(), HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity getEvents(Long minValue, Long maxValue) {
+		return new ResponseEntity(eventTrackingService.searchEventsByInterval(minValue, maxValue), HttpStatus.OK);
 	}
 }

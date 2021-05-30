@@ -17,7 +17,7 @@ import com.es.ariadne.domain.UserCalorieTrackingResponse;
 import com.es.ariadne.domain.UserHistoryEntity;
 import com.es.ariadne.domain.UserHistoryEntry;
 import com.es.ariadne.service.CalorieTrackingService;
-import com.es.ariadne.util.CalorieTrackingUtils;
+import com.es.ariadne.util.EventTrackingUtils;
 import com.es.ariadne.validation.CalorieTrackingValidation;
 
 @Service
@@ -27,7 +27,7 @@ public class CalorieTrackingServiceImpl implements CalorieTrackingService {
 	private CalorieTrackingValidation calorieTrackingValidation;
 	
 	@Autowired
-	private CalorieTrackingUtils calorieTrackingUtils;
+	private EventTrackingUtils calorieTrackingUtils;
 	
 	@Autowired
 	private CalorieTrackingDao calorieTrackingDao;
@@ -54,7 +54,7 @@ public class CalorieTrackingServiceImpl implements CalorieTrackingService {
 		this.calorieTrackingValidation.isValidCalorieTrackingRequest(trackCalorieRequest);
 		
 		Long userId = trackCalorieRequest.getUserId();
-		Date requestDate = CalorieTrackingUtils.toDate(trackCalorieRequest.getDate());
+		Date requestDate = EventTrackingUtils.toDate(trackCalorieRequest.getDate());
 		List<UserHistoryEntry> userHistoryList = this.calorieTrackingDao.viewUserHistory(userId, requestDate);
 		
 		return this.buildUserCalorieTrackingResponse(userHistoryList);
@@ -73,7 +73,7 @@ public class CalorieTrackingServiceImpl implements CalorieTrackingService {
 		Map<Date, List<UserHistoryEntry>> mapTracking = userHistoryList.stream().collect(Collectors.groupingBy(u -> u.getDate()));
 		mapTracking.forEach((k,v) -> {
 			UserCalorieDailyEntry userCalorieDailyEntry = new UserCalorieDailyEntry();
-			userCalorieDailyEntry.setDate(CalorieTrackingUtils.dateToString(k))
+			userCalorieDailyEntry.setDate(EventTrackingUtils.dateToString(k))
 								.setTotal(v.stream().mapToLong(ude -> ude.getCalories()).sum());
 			
 			// collect History Detail entries

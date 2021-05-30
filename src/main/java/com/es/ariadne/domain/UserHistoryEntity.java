@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.es.ariadne.util.CalorieTrackingUtils;
+import com.es.ariadne.util.EventTrackingUtils;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -28,7 +28,7 @@ public class UserHistoryEntity {
 	private Long calories;
 	
 	public UserHistoryEntity standardize() {
-		if (this.date == null) this.date = CalorieTrackingUtils.getTodayDate();
+		if (this.date == null) this.date = EventTrackingUtils.getTodayDate();
 		return this;
 	}
 	public void markAsRemovedCalories() {

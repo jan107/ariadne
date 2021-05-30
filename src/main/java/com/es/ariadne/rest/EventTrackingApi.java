@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import com.es.ariadne.domain.CalorieViewTrackingRequest;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 public interface EventTrackingApi {
@@ -38,4 +41,14 @@ public interface EventTrackingApi {
 	@ApiOperation(value="Update (not Delete) an activity of the user on the current date as default. It also can be on a specific date.", notes="This is a public API", response=String.class)
 	@ApiResponse(code = HttpServletResponse.SC_OK, message = "Success")
 	ResponseEntity removeCalorie(@RequestBody CalorieTrackingRequest trackCalorieRequest);
+	
+	
+	@GetMapping(value = "/public/getEvents/{minValue}/{maxValue}", produces= {MediaType.APPLICATION_JSON_VALUE})
+	@ApiOperation(value="Return all Events between minValue and maxValue", notes="This is a public API", response=List.class)
+	@ApiResponses(value = { 
+			@ApiResponse(code = HttpServletResponse.SC_OK, message = "Success"),
+			@ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "Not found any food by calories range")
+	})
+	ResponseEntity getEvents(@PathVariable("minValue") Long minValue, @PathVariable("maxValue") Long maxValue);
+	
 }

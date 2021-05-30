@@ -9,7 +9,7 @@ import com.es.ariadne.dao.FoodDao;
 import com.es.ariadne.domain.Food;
 import com.es.ariadne.domain.FoodEntity;
 import com.es.ariadne.service.FoodManagementService;
-import com.es.ariadne.util.CalorieTrackingUtils;
+import com.es.ariadne.util.EventTrackingUtils;
 
 @Component
 public class FoodManagementServiceImpl implements FoodManagementService {
@@ -18,7 +18,7 @@ public class FoodManagementServiceImpl implements FoodManagementService {
 	private FoodDao foodDao;
 	
 	@Autowired
-	private CalorieTrackingUtils calorieTrackingUtils;
+	private EventTrackingUtils calorieTrackingUtils;
 	
 	@Override
 	public Boolean addFood(Food food) {

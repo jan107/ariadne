@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class CalorieTrackingUtils implements EventTrackingConstant {
+public class EventTrackingUtils implements EventTrackingConstant {
 
 	@Autowired
 	private DozerBeanMapper dozerBeanMapper;
