@@ -1,10 +1,27 @@
 # springboot-rest-h2-swagger
-This is an example of Spring Boot + JPA + Rest + H2 + Swagger
 
-This project is built as an example for any one to would like to have a base to start
-1. Spring Boot
-2. JPA
-3. Rest Controller
-4. H2
-5. Swagger
+El proyecto consiste en implementar una API para trabajar con esos eventos. Para ello puedes asumir las siguientes estructuras:
+
+Fuente (id, nombre)
+
+Evento (id, fuente_id, timestamp, valor)
+
+La API que hay que implementar es:
+
+- Buscar eventos por lista de timestamps.
+
+- Buscar eventos por fuente_id.
+
+- Buscar eventos dentro de un rango de valores (valor min, valor max).
+
+# Fichero con datos (H2)
+data.sql
+
+# Ejecutar aplicación SpringBoot
+Ejecutar clase EventTrackingApplication.java
+
+# Urls
+![Swagger](swagger-screenshot.png)
+
+**Swagger url:** (http://localhost:8080/eventTracking/swagger-ui.html)
 
